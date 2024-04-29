@@ -36,7 +36,7 @@ class BradsBoilerplate {
     }
 
     ob_start(); ?>
-    <div class="boilerplate-update-me top-nha-cai-wrapper-class"><pre style="display: block;"><?php echo wp_json_encode($attributes) ?></pre></div>
+    <div class="boilerplate-update-me top-nha-cai-wrapper-class"><pre style="display: none;"><?php echo wp_json_encode($attributes) ?></pre></div>
     <?php return ob_get_clean();
 
   }

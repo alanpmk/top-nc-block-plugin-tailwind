@@ -126,7 +126,8 @@ function OurComponent(props) {
   const [showSkyColor, setShowSkyColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [showGrassColor, setShowGrassColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const listbets = JSON.parse(props.lists);
-  console.log(listbets);
+  // console.log(listbets);
+  console.log('front-end loaded');
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, listbets && listbets.map((item, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `topnhacai-${index} my-3 relative`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

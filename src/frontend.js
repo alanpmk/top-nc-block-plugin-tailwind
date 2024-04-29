@@ -10,10 +10,9 @@ divsToUpdate.forEach(div => {
 })
 
 function OurComponent(props) {
-  const [showSkyColor, setShowSkyColor] = useState(false)
-  const [showGrassColor, setShowGrassColor] = useState(false)
   const listbets = JSON.parse(props.lists);
-  console.log(listbets);
+  // console.log(listbets);
+  console.log('front-end loaded');
   return (
     <>
       {listbets && listbets.map((item, index) =>
