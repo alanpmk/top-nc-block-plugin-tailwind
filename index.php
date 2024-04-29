@@ -3,6 +3,7 @@
 /*
   Plugin Name: Top Nhà Cái Plugin
   Version: 1.0
+  Description: Plugin tạo block Top Nhà Cái cho website, giúp hiển thị thông tin các nhà cái uy tín nhất hiện nay.
   Author: AlanIT
   Author URI:
 */
