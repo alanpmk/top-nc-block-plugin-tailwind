@@ -23,8 +23,59 @@ function EditComponent(props) {
   const [lists, setLists] = useState(JSON.parse(props.attributes.lists));
   const [editIndex, setEditIndex] = useState(null);
   const [isDelete, setIsDelete] = useState(null);
+// Add a new state variable for the image URL
+const [imageUrl, setImageUrl] = useState(null);
 
-  console.log('list is: ', lists);
+function openMediaUploaderAdd(e) {
+  e.preventDefault();
+  document.getElementById("topnhacaiAdd").close();
+  let frame = wp.media({
+    title: 'Chọn ảnh logo',
+    button: {
+      text: 'Dùng ảnh này'
+    },
+    multiple: false  // Set to true to allow multiple files to be selected
+  });
+
+  // When an image is selected in the media frame...
+  frame.on('select', function() {
+    // Get media attachment details from the frame state
+    var attachment = frame.state().get('selection').first().toJSON();
+
+    // Set the URL of the selected image to the imageUrl state variable
+    setImageUrl(attachment.url);
+    document.getElementById("topnhacaiAdd").showModal();
+  });
+
+  // Open the media frame
+  frame.open();
+}
+
+  function openMediaUploaderEdit(e) {
+    e.preventDefault();
+    document.getElementById("topnhacaiEdit").close();
+    let frame = wp.media({
+      title: 'Chọn ảnh logo',
+      button: {
+        text: 'Dùng ảnh này'
+      },
+      multiple: false  // Set to true to allow multiple files to be selected
+    });
+
+    // When an image is selected in the media frame...
+    frame.on('select', function () {
+      // Get media attachment details from the frame state
+      var attachment = frame.state().get('selection').first().toJSON();
+
+      // Set the URL of the selected image to the imageUrl state variable
+      setImageUrl(attachment.url);
+      document.getElementById("topnhacaiEdit").showModal();
+    });
+
+    // Open the media frame
+    frame.open();
+  }
+  // console.log('list is: ', lists);
 
   useEffect(() => {
     function addlistDefault() {
@@ -69,12 +120,13 @@ function EditComponent(props) {
       <DragHandle />
       <div className="bg-slate-300 absolute z-40 top-0 left-0 w-6 h-6 rounded-br-full text-sm font-bold"><span className="ml-1">{postion + 1}</span></div>
       <div className="bg-black rounded-md drop-shadow-lg p-2 text-white">
-        <div className="flex justify-around">
-          <div className="flex items-center space-x-2">
+        <div style={{ display:"flex",flexDirection:"space-around" }}>
+          <div className="space-x-2" style={{ display:"flex",alignItems:"center" }}>
             <img
               src={item.logo}
               alt=""
               className="avatar w-20 h-20 rounded-full "
+              style={{ maxWidth: "80px", maxHeight: "80px" }}
             />
             <div className="w-[170px]">
               <h2 className="text-lg font-bold">{item.name}</h2>
@@ -88,7 +140,7 @@ function EditComponent(props) {
               <p className="text-sm">{item.slogan}</p>
             </div>
           </div>
-          <div className="description flex flex-1 justify-center items-center text-center">
+          <div className="description flex-1 justify-center items-center text-center" style={{ display:"flex" }}>
             <div>
               <h2 className="text-yellow-500 text-lg font-bold">
                 {item.giftTitle}
@@ -151,11 +203,12 @@ function EditComponent(props) {
     }
   }
   function editTop(index) {
-    console.log(index);
+
     setEditIndex(() => {
       const data = { id: index, ...lists[index] }; // create a copy of the lists array
       return data; // return the updated array
     });
+    setImageUrl(lists[index].logo);
     document.getElementById("topnhacaiEdit").showModal();
   }
 
@@ -175,7 +228,6 @@ function EditComponent(props) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
     const { id, ...rest } = data;
     const newdata = { order: id, ...rest };
     let newLists = lists;
@@ -220,6 +272,9 @@ function EditComponent(props) {
           <i class="bx bxs-folder-plus text-base mr-1"></i>Thêm
         </button>
 
+        <div>
+          {imageUrl && <img className="hidden" src={imageUrl} alt="Selected" />}
+        </div>
 
         <SortableContainer onSortEnd={onSortEnd} useDragHandle lockAxis="y">
           {lists.map((item, index) => (
@@ -297,17 +352,20 @@ function EditComponent(props) {
                     />
                   </div>
                   <div className="mt-1 block w-1/2">
+                    <div>
                     <label for="logo" class="text-sm font-semibold text-gray-500">Logo</label>
+                      <button className="rounded-md bg-green-500 ml-2 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600" onClick={(e) => openMediaUploaderAdd(e)}>Chọn ảnh</button>
+                    </div>
+                    {imageUrl && <img className="w-14 h-14" src={imageUrl} alt="Selected" />}
                     <input
                       type="text"
                       name="logo"
                       class="block w-full rounded-md border border-slate-300 bg-white px-2 py-2 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                       onChange={handleAddFormInputChange}
                       placeholder="URL logo"
-
+                      value={imageUrl}
                     />
                   </div>
-
                 </div>
                 <div class="text-center mb-2">
                   <button type="submit" class="cursor-pointer rounded-md bg-green-500 px-4 py-2 text-sm font-semibold text-white">
@@ -382,7 +440,7 @@ function EditComponent(props) {
 
 
                 </div>
-                <div class="my-6 flex gap-4">
+                 <div class="my-6 flex gap-4">
                   <div className="mt-1 block w-1/2">
                     <label for="link" class="text-sm font-semibold text-gray-500">Link nhà cái</label>
                     <input
@@ -394,7 +452,7 @@ function EditComponent(props) {
                       value={editIndex && editIndex.link}
                     />
                   </div>
-                  <div className="mt-1 block w-1/2">
+                 {/*<div className="mt-1 block w-1/2">
                     <label for="logo" class="text-sm font-semibold text-gray-500">Logo</label>
                     <input
                       type="text"
@@ -403,6 +461,22 @@ function EditComponent(props) {
                       onChange={handleEditFormInputChange}
                       placeholder="URL logo"
                       value={editIndex && editIndex.logo}
+                    />
+                  </div>*/}
+
+                  <div className="mt-1 block w-1/2">
+                    <div>
+                      <label for="logo" class="text-sm font-semibold text-gray-500">Logo</label>
+                      <button className="rounded-md bg-green-500 ml-2 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600" onClick={(e) => openMediaUploaderEdit(e)}>Chọn ảnh</button>
+                    </div>
+                    {imageUrl && <img className="w-14 h-14" src={imageUrl} alt="Selected" />}
+                    <input
+                      type="text"
+                      name="logo"
+                      class="block w-full rounded-md border border-slate-300 bg-white px-2 py-2 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                      onChange={handleEditFormInputChange}
+                      placeholder="URL logo"
+                      value={imageUrl}
                     />
                   </div>
 

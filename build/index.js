@@ -3532,7 +3532,58 @@ function EditComponent(props) {
   const [lists, setLists] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(JSON.parse(props.attributes.lists));
   const [editIndex, setEditIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   const [isDelete, setIsDelete] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-  console.log('list is: ', lists);
+  // Add a new state variable for the image URL
+  const [imageUrl, setImageUrl] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  function openMediaUploaderAdd(e) {
+    e.preventDefault();
+    document.getElementById("topnhacaiAdd").close();
+    let frame = wp.media({
+      title: 'Chọn ảnh logo',
+      button: {
+        text: 'Dùng ảnh này'
+      },
+      multiple: false // Set to true to allow multiple files to be selected
+    });
+
+    // When an image is selected in the media frame...
+    frame.on('select', function () {
+      // Get media attachment details from the frame state
+      var attachment = frame.state().get('selection').first().toJSON();
+
+      // Set the URL of the selected image to the imageUrl state variable
+      setImageUrl(attachment.url);
+      document.getElementById("topnhacaiAdd").showModal();
+    });
+
+    // Open the media frame
+    frame.open();
+  }
+  function openMediaUploaderEdit(e) {
+    e.preventDefault();
+    document.getElementById("topnhacaiEdit").close();
+    let frame = wp.media({
+      title: 'Chọn ảnh logo',
+      button: {
+        text: 'Dùng ảnh này'
+      },
+      multiple: false // Set to true to allow multiple files to be selected
+    });
+
+    // When an image is selected in the media frame...
+    frame.on('select', function () {
+      // Get media attachment details from the frame state
+      var attachment = frame.state().get('selection').first().toJSON();
+
+      // Set the URL of the selected image to the imageUrl state variable
+      setImageUrl(attachment.url);
+      document.getElementById("topnhacaiEdit").showModal();
+    });
+
+    // Open the media frame
+    frame.open();
+  }
+  // console.log('list is: ', lists);
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     function addlistDefault() {
       let arrrays = [{
@@ -3593,13 +3644,24 @@ function EditComponent(props) {
   }, postion + 1)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-black rounded-md drop-shadow-lg p-2 text-white"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex justify-around"
+    style: {
+      display: "flex",
+      flexDirection: "space-around"
+    }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center space-x-2"
+    className: "space-x-2",
+    style: {
+      display: "flex",
+      alignItems: "center"
+    }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: item.logo,
     alt: "",
-    className: "avatar w-20 h-20 rounded-full "
+    className: "avatar w-20 h-20 rounded-full ",
+    style: {
+      maxWidth: "80px",
+      maxHeight: "80px"
+    }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-[170px]"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
@@ -3619,7 +3681,10 @@ function EditComponent(props) {
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "text-sm"
   }, item.slogan))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "description flex flex-1 justify-center items-center text-center"
+    className: "description flex-1 justify-center items-center text-center",
+    style: {
+      display: "flex"
+    }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "text-yellow-500 text-lg font-bold"
   }, item.giftTitle), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -3669,7 +3734,6 @@ function EditComponent(props) {
     }
   }
   function editTop(index) {
-    console.log(index);
     setEditIndex(() => {
       const data = {
         id: index,
@@ -3677,6 +3741,7 @@ function EditComponent(props) {
       }; // create a copy of the lists array
       return data; // return the updated array
     });
+    setImageUrl(lists[index].logo);
     document.getElementById("topnhacaiEdit").showModal();
   }
   function deleteTop(index) {
@@ -3694,7 +3759,6 @@ function EditComponent(props) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
     const {
       id,
       ...rest
@@ -3759,7 +3823,11 @@ function EditComponent(props) {
     onClick: () => addNew()
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "bx bxs-folder-plus text-base mr-1"
-  }), "Th\xEAm"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SortableContainer, {
+  }), "Th\xEAm"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, imageUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    className: "hidden",
+    src: imageUrl,
+    alt: "Selected"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SortableContainer, {
     onSortEnd: onSortEnd,
     useDragHandle: true,
     lockAxis: "y"
@@ -3847,15 +3915,23 @@ function EditComponent(props) {
     placeholder: "Link nh\xE0 c\xE1i"
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mt-1 block w-1/2"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: "logo",
     class: "text-sm font-semibold text-gray-500"
-  }, "Logo"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, "Logo"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "rounded-md bg-green-500 ml-2 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600",
+    onClick: e => openMediaUploaderAdd(e)
+  }, "Ch\u1ECDn \u1EA3nh")), imageUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    className: "w-14 h-14",
+    src: imageUrl,
+    alt: "Selected"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     name: "logo",
     class: "block w-full rounded-md border border-slate-300 bg-white px-2 py-2 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm",
     onChange: handleAddFormInputChange,
-    placeholder: "URL logo"
+    placeholder: "URL logo",
+    value: imageUrl
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "text-center mb-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
@@ -3949,16 +4025,23 @@ function EditComponent(props) {
     value: editIndex && editIndex.link
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mt-1 block w-1/2"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: "logo",
     class: "text-sm font-semibold text-gray-500"
-  }, "Logo"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, "Logo"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "rounded-md bg-green-500 ml-2 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600",
+    onClick: e => openMediaUploaderEdit(e)
+  }, "Ch\u1ECDn \u1EA3nh")), imageUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    className: "w-14 h-14",
+    src: imageUrl,
+    alt: "Selected"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     name: "logo",
     class: "block w-full rounded-md border border-slate-300 bg-white px-2 py-2 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm",
     onChange: handleEditFormInputChange,
     placeholder: "URL logo",
-    value: editIndex && editIndex.logo
+    value: imageUrl
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "text-center mb-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {

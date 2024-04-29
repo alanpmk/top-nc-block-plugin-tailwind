@@ -18,6 +18,7 @@ class BradsBoilerplate {
     wp_register_script('TopNCScript', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
     wp_enqueue_style('BoxiconsFonts', 'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
     wp_register_style('TopNCStyle', plugin_dir_url(__FILE__) . 'build/index.css');
+    wp_register_script('TopNCScript', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-media'));
 
     register_block_type('topnhacai/top-nha-cai-plugin', array(
       'render_callback' => array($this, 'renderCallback'),
