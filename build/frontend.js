@@ -123,8 +123,6 @@ divsToUpdate.forEach(div => {
   div.classList.remove("boilerplate-update-me");
 });
 function OurComponent(props) {
-  const [showSkyColor, setShowSkyColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [showGrassColor, setShowGrassColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const listbets = JSON.parse(props.lists);
   // console.log(listbets);
   console.log('front-end loaded');
@@ -136,9 +134,9 @@ function OurComponent(props) {
     className: "ml-1"
   }, index + 1)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `bg-black rounded-md drop-shadow-lg p-2 text-white
-          ${index === 0 && 'border-2 border-orange-500 shadow-md shadow-orange-500/70'}
-          ${index === 1 && 'border-2 border-blue-500 shadow-md shadow-blue-500/70'}
-          ${index === 2 && 'border-2 border-blue-500 shadow-md shadow-blue-500/70'}
+          ${index === 0 && 'border-2 border-orange-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#f70,0_0_5px_#f70,0_0_12px_#f70]'}
+          ${index === 1 && 'border-2 border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_5px_#08f,0_0_12px_#08f]'}
+          ${index === 2 && 'border-2  border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_5px_#08f,0_0_12px_#08f]'}
           `
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex justify-around"

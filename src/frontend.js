@@ -19,9 +19,9 @@ function OurComponent(props) {
         <div className={`topnhacai-${index} my-3 relative`}>
           <div className={`bg-slate-300 absolute z-10 top-0 left-0 w-6 h-6 rounded-br-full text-sm font-bold overflow-hidden`}><span className="ml-1">{index + 1}</span></div>
           <div className={`bg-black rounded-md drop-shadow-lg p-2 text-white
-          ${index === 0 && 'border-2 border-orange-500 shadow-md shadow-orange-500/70'}
-          ${index === 1 && 'border-2 border-blue-500 shadow-md shadow-blue-500/70'}
-          ${index === 2 && 'border-2 border-blue-500 shadow-md shadow-blue-500/70'}
+          ${index === 0 && 'border-2 border-orange-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#f70,0_0_5px_#f70,0_0_12px_#f70]'}
+          ${index === 1 && 'border-2 border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_5px_#08f,0_0_12px_#08f]'}
+          ${index === 2 && 'border-2  border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_5px_#08f,0_0_12px_#08f]'}
           `}>
             <div className="flex justify-around">
               <div className="flex items-center space-x-2">

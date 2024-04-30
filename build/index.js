@@ -1,6 +1,91 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/data.js":
+/*!*********************!*\
+  !*** ./src/data.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   RAW_DATA: () => (/* binding */ RAW_DATA)
+/* harmony export */ });
+const RAW_DATA = [{
+  "name": "EE88",
+  "slogan": "Nhà cái VIP",
+  "giftTitle": "Khuyến mãi 100%",
+  "giftDesc": "Tặng 100% tiền nạp đầu tiên",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/LOGO-EE88.png"
+}, {
+  "name": "NEW88",
+  "slogan": "Nhà cái VIP",
+  "giftTitle": "+58,000 VND",
+  "giftDesc": "Đăng ký nhận miễn phí 58k cực khét",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/NEW88-LOGO-2024-.jpg"
+}, {
+  "name": "i9Bet",
+  "slogan": "Nhà cái xanh chín truyền thống",
+  "giftTitle": "Tặng 150k free khi đăng ký",
+  "giftDesc": "Hoàn trả lên đến 3%!",
+  "link": "https://vn88.com",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/i9-bet.png"
+}, {
+  "name": "123B",
+  "slogan": "Nhà cái hàng đầu Châu Á",
+  "giftTitle": "+1888k",
+  "giftDesc": "Hoàn trả đến 0.3% cực hot",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/123b.png"
+}, {
+  "name": "VN88",
+  "slogan": "Sòng bài thuần Việt",
+  "giftTitle": "+88.000 VND",
+  "giftDesc": "Tặng 88k cược miễn phí cho tân thủ",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/vn88-150x150-min-150x150-1.png"
+}, {
+  "name": "68 Game bài",
+  "slogan": "Game bài số 1",
+  "giftTitle": "Đăng ký nhận gift code 100k",
+  "giftDesc": "Cổng game tài xỉu uy tín số 1 VIệt Nam",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/IMG_1985.jpg"
+}, {
+  "name": "Mu88",
+  "slogan": "Nhà cái xanh chín truyền thống",
+  "giftTitle": "Chuyên thể thao",
+  "giftDesc": "Nạp +100% - Hoàn cược bóng 100%",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/ezgif.com-gif-to-webp.webp"
+}, {
+  "name": "Jun88",
+  "slogan": "Casino khét lẹt",
+  "giftTitle": "+388.000VND",
+  "giftDesc": "Nhân đôi tiền nạp cho thành viên mới",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/juun88-motion1.gif"
+}, {
+  "name": "Fb68",
+  "slogan": "Tài xỉu đỉnh cao",
+  "giftTitle": "Nhà cái số 1 Châu á",
+  "giftDesc": "Đăng ký nhận thưởng 2 lần nạp đầu",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/logo-fb68.jpg"
+}, {
+  "name": "QH88",
+  "slogan": "Nhà cái mới VIP",
+  "giftTitle": "Đăng ký +88k miễn phí",
+  "giftDesc": "Xổ số 1 ăn 99.5 - Hoàn trả 2%",
+  "link": "#!",
+  "logo": "https://webcobac1.com/wp-content/uploads/2024/04/ezgif.com-resize.gif"
+}];
+
+/***/ }),
+
 /***/ "./node_modules/invariant/browser.js":
 /*!*******************************************!*\
   !*** ./node_modules/invariant/browser.js ***!
@@ -3509,6 +3594,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_sortable_hoc__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-sortable-hoc */ "./node_modules/react-sortable-hoc/dist/react-sortable-hoc.esm.js");
 /* harmony import */ var array_move__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! array-move */ "./node_modules/array-move/index.js");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./data */ "./src/data.js");
+
 
 
 
@@ -3531,7 +3618,7 @@ wp.blocks.registerBlockType("topnhacai/top-nha-cai-plugin", {
 function EditComponent(props) {
   const [lists, setLists] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(JSON.parse(props.attributes.lists));
   const [editIndex, setEditIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-  const [isDelete, setIsDelete] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [rawData, setRawData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(_data__WEBPACK_IMPORTED_MODULE_4__.RAW_DATA);
   // Add a new state variable for the image URL
   const [imageUrl, setImageUrl] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   function openMediaUploaderAdd(e) {
@@ -3582,30 +3669,18 @@ function EditComponent(props) {
     // Open the media frame
     frame.open();
   }
-  // console.log('list is: ', lists);
+  // console.log('list is: ', props.attributes.lists);
 
+  //Update raw data if exist
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    function addlistDefault() {
-      let arrrays = [{
-        name: "VN88",
-        link: "https://vn88.com",
-        slogan: "Nhà cái VIP",
-        giftTitle: "Khuyến mãi 100%",
-        giftDesc: "Tặng 100% tiền nạp đầu tiên",
-        logo: "http://webcobac.test/wp-content/uploads/2018/12/advt-400-300.png"
-      }, {
-        name: "i9Bet",
-        link: "https://vn88.com",
-        slogan: "Nhà cái xanh chín truyền thống",
-        giftTitle: "Tặng 150k free khi đăng ký",
-        giftDesc: "Hoàn trả lên đến 3%!",
-        logo: "http://webcobac.test/wp-content/uploads/2018/12/advt-400-300.png"
-      }];
-      props.setAttributes({
-        lists: JSON.stringify(arrrays)
-      });
+    function addlistDefault(rawData) {
+      if (rawData && rawData.length > 0) {
+        props.setAttributes({
+          lists: JSON.stringify(rawData)
+        });
+      }
     }
-    // addlistDefault();
+    addlistDefault(rawData);
   }, []);
   // update attributes
   const updateAtrributes = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(() => {
@@ -3781,7 +3856,7 @@ function EditComponent(props) {
       order: lists.length.toString(),
       ...data
     };
-    const newLists = [...lists, newdata];
+    const newLists = [...lists, data];
     setLists(newLists);
     props.setAttributes({
       lists: JSON.stringify(newLists)

@@ -5,6 +5,7 @@ import {
   sortableHandle,
 } from 'react-sortable-hoc';
 import { arrayMoveImmutable } from 'array-move';
+import { RAW_DATA } from "./data";
 
 wp.blocks.registerBlockType("topnhacai/top-nha-cai-plugin", {
   title: "Top Nha Cai Block",
@@ -22,7 +23,7 @@ wp.blocks.registerBlockType("topnhacai/top-nha-cai-plugin", {
 function EditComponent(props) {
   const [lists, setLists] = useState(JSON.parse(props.attributes.lists));
   const [editIndex, setEditIndex] = useState(null);
-  const [isDelete, setIsDelete] = useState(null);
+  const [rawData, setRawData] = useState(RAW_DATA);
 // Add a new state variable for the image URL
 const [imageUrl, setImageUrl] = useState(null);
 
@@ -75,31 +76,16 @@ function openMediaUploaderAdd(e) {
     // Open the media frame
     frame.open();
   }
-  // console.log('list is: ', lists);
+  // console.log('list is: ', props.attributes.lists);
 
+  //Update raw data if exist
   useEffect(() => {
-    function addlistDefault() {
-      let arrrays = [
-        {
-          name: "VN88",
-          link: "https://vn88.com",
-          slogan: "Nhà cái VIP",
-          giftTitle: "Khuyến mãi 100%",
-          giftDesc: "Tặng 100% tiền nạp đầu tiên",
-          logo: "http://webcobac.test/wp-content/uploads/2018/12/advt-400-300.png",
-        },
-        {
-          name: "i9Bet",
-          link: "https://vn88.com",
-          slogan: "Nhà cái xanh chín truyền thống",
-          giftTitle: "Tặng 150k free khi đăng ký",
-          giftDesc: "Hoàn trả lên đến 3%!",
-          logo: "http://webcobac.test/wp-content/uploads/2018/12/advt-400-300.png",
-        },
-      ];
-      props.setAttributes({ lists: JSON.stringify(arrrays) });
+    function addlistDefault(rawData) {
+      if(rawData && rawData.length > 0) {
+        props.setAttributes({ lists: JSON.stringify(rawData) });
+      }
     }
-    // addlistDefault();
+    addlistDefault(rawData);
   }, []);
   // update attributes
   const updateAtrributes = useCallback(() => {
@@ -242,7 +228,7 @@ function openMediaUploaderAdd(e) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     const newdata = { order: lists.length.toString(), ...data };
-    const newLists = [...lists, newdata];
+    const newLists = [...lists, data];
     setLists(newLists);
     props.setAttributes({ lists: JSON.stringify(newLists) });
     document.getElementById("topnhacaiAdd").close();
