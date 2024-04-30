@@ -129,13 +129,13 @@ function OurComponent(props) {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, listbets && listbets.map((item, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `topnhacai-${index} my-3 relative`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `bg-slate-300 absolute z-10 top-0 left-0 w-6 h-6 rounded-br-full text-sm font-bold overflow-hidden`
+    className: `bg-slate-300 absolute z-[1] top-0 left-0 w-6 h-6 rounded-tl-md rounded-br-3xl text-sm font-bold overflow-hidden`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "ml-1"
   }, index + 1)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `bg-black rounded-md drop-shadow-lg p-2 text-white
-          ${index === 0 && 'border-2 border-orange-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#f70,0_0_5px_#f70,0_0_12px_#f70]'}
-          ${index === 1 && 'border-2 border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_5px_#08f,0_0_12px_#08f]'}
+          ${index === 0 && 'border-2 border-purple-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#cd00cc,0_0_5px_#cd00cc,0_0_12px_#cd00cc]'}
+          ${index === 1 && 'border-2 border-orange-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#f70,0_0_5px_#f70,0_0_12px_#f70]'}
           ${index === 2 && 'border-2  border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_5px_#08f,0_0_12px_#08f]'}
           `
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -174,10 +174,17 @@ function OurComponent(props) {
     className: "relative flex justify-center items-center w-[160px]"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: item.link,
-    className: "w-full bg-[#c00] text-white font-bold text-center px-2 py-1 rounded-md hover:bg-yellow-500",
+    className: `w-full bg-[#c00] font-bold text-center px-2 py-1 rounded-md
+                 ${index === 0 && 'hover:bg-purple-500'}
+                 ${index === 1 && 'hover:bg-orange-500'}
+                 ${index === 2 && 'hover:bg-sky-500'}
+                 ${index > 2 && 'hover:bg-yellow-500'}
+                 `,
     target: "_blank",
     rel: "nofollow sponsored noopener"
-  }, "Truy c\u1EADp ", item.name))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-white"
+  }, "Truy c\u1EADp ", item.name)))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mb-description flex flex-1 justify-center items-center text-center mt-1 border-t border-red-500"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "text-yellow-500 text-lg font-bold"
